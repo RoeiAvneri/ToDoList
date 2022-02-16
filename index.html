@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+</head>
+<body onload="autoLoad()">
+
+<div id="myDIV" class="header">
+    <h2 style="margin:5px" id="Title_Lis"></h2>
+    <input type="text" id="myInput" placeholder="Something To Do...">
+    <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+    
+<ul id="myUL">
+    <!--
+    <li>Hit the gym</li>
+    <li>Pay bills</li>
+    <li>Meet George</li>
+    <li>Buy eggs</li>
+    <li>Read a book</li>
+    <li>Organize office</li>
+    -->
+</ul>
+<div id="snackbar"></div>
+<script>
+function snackbar(text) {
+    var x = document.getElementById("snackbar");
+    document.getElementById("snackbar").innerHTML = text
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+  // Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  li.className = "DataTable"
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    snackbar("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+
+}  
+function autoLoad(){
+    switch (new Date().getDay()) {
+        case 0:
+        day = "Sunday";
+        break;
+        case 1:
+        day = "Monday";
+        break;
+        case 2:
+        day = "Tuesday";
+        break;
+        case 3:
+        day = "Wednesday";
+        break;
+        case 4:
+        day = "Thursday";
+        break;
+        case 5:
+        day = "Friday";
+        break;
+        case  6:
+        day = "Saturday";
+    }
+    document.getElementById("Title_Lis").innerHTML = "My To Do List Of " + day;
+    console.log(day)
+    localStorage.setItem("data", inputValue);
+}
+let lastname = localStorage.getItem(data);
+function NewLoad() {
+    var li = document.createElement("li");
+    li.className = "DataTable"
+    var inputValue = document.getElementById("myInput").value;
+    var t = document.createTextNode(lastname);
+    li.appendChild(t);
+    if (inputValue === '') {
+      snackbar("You must write something!");
+    } else {
+      document.getElementById("myUL").appendChild(li);
+    }
+    document.getElementById("myInput").value = "";
+  
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+  
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+  
+  }  
+  function autoLoad(){
+      switch (new Date().getDay()) {
+          case 0:
+          day = "Sunday";
+          break;
+          case 1:
+          day = "Monday";
+          break;
+          case 2:
+          day = "Tuesday";
+          break;
+          case 3:
+          day = "Wednesday";
+          break;
+          case 4:
+          day = "Thursday";
+          break;
+          case 5:
+          day = "Friday";
+          break;
+          case  6:
+          day = "Saturday";
+      }
+      document.getElementById("Title_Lis").innerHTML = "My To Do List Of " + day;
+      console.log(day)
+      localStorage.setItem("data", inputValue);
+  }
+</script>
+
+</body>
+</html>
